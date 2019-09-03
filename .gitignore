@@ -1,1 +1,3 @@
-db.sqlite3s
+db.sqlite3
+./__pycache__
+*.pyc
