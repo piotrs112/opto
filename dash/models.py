@@ -44,11 +44,7 @@ class Parameters(models.Model):
 
     def __repr__(self):
         return f'''
-             ,-""-.              ,-""-.
-            / ,--. \            / ,--. \\
-           | ( OL ) | {self.pd}mm     | ( OP ) |
-            \ `--' /            \ `--' /
-             `-..-'              `-..-'  
+            PD: <--{self.pd}-->
             D: {self.op}                {self.ol}
             A: {self.op_astigm}         {self.ol_astigm}
             Ax: {self.op_axis}          {self.ol_axis}
