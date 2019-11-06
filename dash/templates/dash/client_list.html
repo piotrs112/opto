@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <title>Opto</title>
+    </head>
+
+    <body>
+        <table>
+        {% for c in client_list %}
+            <tr>
+                <td><a href="{% url 'client' c.id %}">{{c.name}}</a></td>
+            </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>

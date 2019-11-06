@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Opto</title>
+    </head>
+    <body>
+    {{username}}
+    <h1>{{ client.name }} {{ client.surname }}</h1>
+
+    {% if client.birthdate %}
+        </br>ur.: {{ client.birthdate }}
+    {% endif %}
+
+    {% if client.email %}
+        </br>ur.: {{ client.email }}
+    {% endif %}
+
+    {% if order %}
+        <h2>Order history</h2>
+        <br/>
+        {% for o in order %}
+            {{o}} <br/>
+        {% endfor %}
+    {% endif %}
+    
+</body>
+</html>
