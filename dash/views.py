@@ -32,7 +32,8 @@ class ClientCreate(generic.CreateView):
         'name',
         'surname',
         'birthdate',
-        'email',]
+        'email',
+    ]
 
 class OrderCreate(generic.CreateView):
     model = Order
@@ -41,3 +42,4 @@ class OrderCreate(generic.CreateView):
         'client',
         'comment',
         'parameters',
+    ]
