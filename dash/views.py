@@ -43,3 +43,15 @@ class OrderCreate(generic.CreateView):
         'comment',
         'parameters',
     ]
+
+class OrderDetail(generic.DetailView):
+    model = Order
+    template_name = 'dash/order.html'
+
+
+class OrderList(generic.ListView):
+    template_name = 'dash/order_list.html'
+    context_object_name = 'client_list'
+
+    def get_queryset(self):
+        return Order.objects.all()
