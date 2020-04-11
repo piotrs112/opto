@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-from accounts.models import Company
+from accounts.models import Company, Employee
 
 # Create your models here.
 class Client(models.Model):
@@ -22,12 +22,18 @@ class Client(models.Model):
         self.birthdate = None
         self.email = None
 
+    def authorize(self, employee):
+        if self.clientOf is employee.employer:
+            return True
+        else: return False
+
+
 class Product(models.Model):
     name = models.CharField(max_length=50)
     price = models.FloatField()
     unit = models.CharField(max_length=10)
     quantity_available = models.IntegerField()
-
+    owner = models.ForeignKey(Company, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f"{self.name}: {self.price} PLN/{self.unit}"
@@ -36,6 +42,11 @@ class Product(models.Model):
         if self.quantity_available > 0:
             return True
         else: return False
+    def authorize(self, employee):
+        if self.owner is employee.employer:
+            return True
+        else: return False
+
 
 
 class Parameters(models.Model):
@@ -57,6 +68,11 @@ class Parameters(models.Model):
             Ax: {self.op_axis}          {self.ol_axis}
             
         '''
+    
+    def authorize(self, employee):
+        if self.client.clientOf is employee.employer:
+            return True
+        else: return False
 
 
 class Order(models.Model):
@@ -88,14 +104,19 @@ class Order(models.Model):
         op = OrderProduct(order=self, product=product, quantity=quantity)
         op.save()
 
+    def authorize(self, employee):
+        if self.client.clientOf is employee.employer:
+            return True
+        else: return False
 
-class OrderProduct(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
 
-    class Meta:
-        unique_together = ('order', 'product')
+# class OrderProduct(models.Model):
+#     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+#     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+#     quantity = models.IntegerField(default=1)
+
+#     class Meta:
+#         unique_together = ('order', 'product')
 
 
 class Appointment(models.Model):
@@ -106,3 +127,9 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.client.name} {self.client.surname} on {self.date}"
+
+    
+    def authorize(self, employee):
+        if self.client.clientOf is employee.employer:
+            return True
+        else: return False
