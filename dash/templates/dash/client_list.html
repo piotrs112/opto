@@ -4,10 +4,12 @@
     </head>
 
     <body>
+        <h1>Clients of {{request.user.employee.employer}}</h1>
+        <h2>Made for employee {{request.user.employee}}</h2>
         <table>
         {% for c in client_list %}
             <tr>
-                <td><a href="{% url 'client' c.id %}">{{c.name}}</a></td>
+                <td><a href="{% url 'client' c.id %}">{{c.name}} {{c.surname}}</a></td>
             </tr>
         {% endfor %}
         </table>
