@@ -3,7 +3,7 @@ A CMS for opticians.
 
 Uses **Python** and **Django**.
 
-##Main features:
+## Main features:
 - Client management
 - Storage and availability of products
 - Appointments
