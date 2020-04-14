@@ -4,3 +4,4 @@
 *.png
 db.sqlite3
 opto/secret_key.py
+.vscode/
